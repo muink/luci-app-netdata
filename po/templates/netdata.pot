@@ -9,21 +9,35 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:33
+msgid "Enable logger"
+msgstr ""
+
 #: applications/luci-app-netdata/root/usr/share/rpcd/acl.d/luci-app-netdata.json:3
 msgid "Grant UCI access for netdata"
 msgstr ""
 
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:44
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:3
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:14
 msgid "Netdata"
 msgstr ""
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/main.js:18
-msgid ""
-"Port 0 is not supported.<br />Change to a other port and "
-"try again."
+msgid "Port 0 is not supported.<br />Change to a other port and try again."
 msgstr ""
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:28
 msgid "Service port"
+msgstr ""
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:37
+msgid "Start"
+msgstr ""
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:44
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:45
+msgid "Stop"
 msgstr ""
