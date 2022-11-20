@@ -4,7 +4,8 @@ Open-source, free, preconfigured, opinionated, and always real-time.
 
 ### Screenshots
 
-![demo](.img/demo.png "demo")  
+![config](.img/config.png "config")  
+![netdata](.img/netdata.png "netdata")  
 
 ### How to install
 
