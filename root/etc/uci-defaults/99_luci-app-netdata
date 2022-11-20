@@ -1,0 +1,54 @@
+#!/bin/sh
+
+INITD='/etc/init.d/netdata'
+SRCURL='https://github.com/openwrt/packages/blob/master/admin/netdata/files/netdata.init'
+
+[ "$(sed -n '/start_service/,/}/ {/luci_overridden/p}' "$INITD")" == "" ] || exit 0
+
+
+sed -i "2i# Raw file: $SRCURL" "$INITD"
+
+sed -Ei "/start_service/a\\
+\tluci_overridden\n\
+\tnetdata_stop\n\
+\tconfig_load 'netdata'\n\
+\tconfig_foreach get_config 'netdata'\n\
+\t[ \"\\\$enabled\" == \"1\" ] \|\| return 1\n\
+\tlogger -t netdata -p warn \"netdata is start.\"\
+" "$INITD"
+
+sed -Ei "/start_service/,/\}/{ \
+s,(procd_set_param command .+),\1 -p \\\$port\n\
+\t[ \"\\\$logger\" == \"1\" ] \&\& \\\\\n\
+\tprocd_set_param stdout 1 \&\& \\\\\n\
+\tprocd_set_param stderr 1, \
+}" "$INITD"
+
+cat <<-"EOF" >> "$INITD"
+
+luci_overridden() {
+}
+
+get_config() {
+    config_get_bool enabled $1 enabled 1
+    config_get_bool logger $1 logger 1
+    config_get port $1 port 19999
+}
+
+netdata_stop() {
+    pgrep -f /usr/sbin/netdata | xargs kill -9 >/dev/null 2>&1 
+    logger -t netdata -p warn "netdata is stop."
+}
+
+stop_service() {
+    netdata_stop
+}
+
+service_triggers() {
+    procd_add_reload_trigger 'netdata'
+}
+EOF
+
+sed -Ei "s|    |\t|g" "$INITD"
+
+exit 0

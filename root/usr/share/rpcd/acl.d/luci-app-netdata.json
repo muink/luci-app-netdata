@@ -2,6 +2,9 @@
   "luci-app-netdata": {
     "description": "Grant UCI access for netdata",
     "read": {
+      "file": {
+        "/etc/init.d/netdata": [ "exec" ]
+      },
       "uci": [ "netdata" ]
     },
     "write": {
