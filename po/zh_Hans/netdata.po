@@ -26,7 +26,7 @@ msgstr "授予访问 LuCI 应用 netdata 的权限"
 
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:3
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:14
-msgid "NetData"
+msgid "Netdata"
 msgstr ""
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/main.js:18

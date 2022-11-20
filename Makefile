@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 LUCI_NAME:=luci-app-netdata
 PKG_VERSION:=20221120
 
-LUCI_TITLE:=LuCI NetData
+LUCI_TITLE:=LuCI Netdata
 LUCI_DEPENDS:=+netdata
 
 LUCI_DESCRIPTION:=Real-time performance monitoring

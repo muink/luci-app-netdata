@@ -1,5 +1,5 @@
-# LuCI NetData
-> [NetData][] is high-fidelity infrastructure monitoring and troubleshooting.
+# LuCI Netdata
+> [Netdata][] is high-fidelity infrastructure monitoring and troubleshooting.
 Open-source, free, preconfigured, opinionated, and always real-time.
 
 ### Screenshots
@@ -13,7 +13,7 @@ Open-source, free, preconfigured, opinionated, and always real-time.
 3. Login router and goto **System --> Software**
 4. Upload and install ipk
 5. Reboot if the app is not automatically added in page
-6. Goto **Status --> NetData**
+6. Goto **Status --> Netdata**
 7. If after program update. LuCI is not working properly, please reinstall luci-app-netdata.
 
 ### Build
@@ -41,7 +41,7 @@ make menuconfig
 make package/luci-app-netdata/compile V=99
 ```
 
-[NetData]: https://github.com/netdata/netdata
+[Netdata]: https://github.com/netdata/netdata
 
 ### License
 
