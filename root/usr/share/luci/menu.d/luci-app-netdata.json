@@ -1,0 +1,29 @@
+{
+  "admin/status/netdata": {
+    "title": "NetData",
+    "order": 10,
+    "action": {
+      "type": "firstchild"
+    },
+    "depends": {
+      "acl": [ "luci-app-netdata" ],
+      "uci": { "netdata": true }
+    }
+  },
+  "admin/status/netdata/netdata": {
+    "title": "NetData",
+    "order": 1,
+    "action": {
+      "type": "view",
+      "path": "netdata/main"
+    }
+  },
+  "admin/status/netdata/config": {
+    "title": "Config",
+    "order": 2,
+    "action": {
+      "type": "view",
+      "path": "netdata/config"
+    }
+  }
+}
