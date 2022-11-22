@@ -12,15 +12,27 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.12.1-dev\n"
 
+#: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:30
+msgid "Advanced"
+msgstr "高级"
+
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:22
 msgid "Config"
 msgstr "配置"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:25
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/advanced.js:21
+msgid "Contents have been saved."
+msgstr ""
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/advanced.js:31
+msgid "Edit Netdata main config: <code>/etc/netdata/netdata.conf</code>"
+msgstr "编辑 Netdata 主配置: <code>/etc/netdata/netdata.conf</code>"
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:28
 msgid "Enable"
 msgstr "启用"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:33
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
 msgid "Enable logger"
 msgstr "启用日志记录器"
 
@@ -28,8 +40,8 @@ msgstr "启用日志记录器"
 msgid "Grant UCI access for netdata"
 msgstr "授予访问 LuCI 应用 netdata 的权限"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:44
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:39
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:47
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:3
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:14
 msgid "Netdata"
@@ -39,16 +51,20 @@ msgstr ""
 msgid "Port 0 is not supported.<br />Change to a other port and try again."
 msgstr "不支持端口 0。<br />改为其他端口然后再试一次。"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:28
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:31
 msgid "Service port"
 msgstr "服务端口"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:37
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:39
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:40
 msgid "Start"
 msgstr "启动"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:44
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:45
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:47
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:48
 msgid "Stop"
 msgstr "停止"
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/advanced.js:25
+msgid "Unable to save contents: %s"
+msgstr ""
