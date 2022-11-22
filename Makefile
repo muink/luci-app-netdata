@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_NAME:=luci-app-netdata
-PKG_VERSION:=20221120
+PKG_VERSION:=20221121
 
 LUCI_TITLE:=LuCI Netdata
 LUCI_DEPENDS:=+netdata
