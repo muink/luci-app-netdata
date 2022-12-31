@@ -16,6 +16,7 @@ Open-source, free, preconfigured, opinionated, and always real-time.
 5. Reboot if the app is not automatically added in page
 6. Goto **Status --> Netdata**
 7. If after program update. LuCI is not working properly, please reinstall luci-app-netdata.
+8. After you upgrade Netdata, you need to reinstall luci-app-netdata.
 
 ### Build
 
