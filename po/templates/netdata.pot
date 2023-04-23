@@ -22,6 +22,10 @@ msgid "Enable"
 msgstr ""
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
+msgid "Enable SSL"
+msgstr ""
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:40
 msgid "Enable logger"
 msgstr ""
 
@@ -29,14 +33,14 @@ msgstr ""
 msgid "Grant UCI access for netdata"
 msgstr ""
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:39
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:47
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:43
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:51
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:3
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:14
 msgid "Netdata"
 msgstr ""
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/main.js:18
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/main.js:19
 msgid "Port 0 is not supported.<br />Change to a other port and try again."
 msgstr ""
 
@@ -44,14 +48,20 @@ msgstr ""
 msgid "Service port"
 msgstr ""
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:39
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:40
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:43
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:44
 msgid "Start"
 msgstr ""
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:47
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:48
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:51
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:52
 msgid "Stop"
+msgstr ""
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:37
+msgid ""
+"To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-"
+"nginx</b><br/> first"
 msgstr ""
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/advanced.js:25

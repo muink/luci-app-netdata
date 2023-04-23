@@ -14,6 +14,7 @@ sed -Ei "/start_service/a\\
 \tconfig_load 'netdata'\n\
 \tconfig_foreach get_config 'netdata'\n\
 \t[ \"\\\$enabled\" == \"1\" ] \|\| return 1\n\
+\t[ \"\\\$ssl\" == \"1\" ] \&\& write_nginx\n\
 \tlogger -t netdata -p warn \"netdata is start.\"\
 " "$INITD"
 
@@ -31,9 +32,26 @@ luci_overridden() {
 }
 
 get_config() {
-    config_get_bool enabled $1 enabled 1
-    config_get_bool logger $1 logger 1
+    config_get_bool enabled $1 enabled 0
+    config_get_bool ssl $1 ssl_sw 0
+    config_get_bool logger $1 logger 0
     config_get port $1 port 19999
+}
+
+write_nginx() {
+location="/etc/nginx/conf.d/netdata.locations"
+mkdir -p /etc/nginx/conf.d/ 2>/dev/null
+[ -f "$location" ] && [ "$(sed -En "s|.*\bproxy_pass\s*https?:[^:]+:(\d+).*|\1|p" "$location")" == "$port" ] && return 0
+cat << LOCATIONS > "$location"
+location /netdata/ {
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    proxy_pass http://localhost:$port/;
+}
+LOCATIONS
+/etc/init.d/nginx reload
 }
 
 netdata_stop() {

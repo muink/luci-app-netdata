@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2022-11-20 08:04+0000\n"
+"PO-Revision-Date: 2023-04-23 11:28+0000\n"
 "Last-Translator: muink <hukk1996@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "openwrt/luciapplicationsnetdata/zh_Hans/>\n"
@@ -33,6 +33,10 @@ msgid "Enable"
 msgstr "启用"
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:36
+msgid "Enable SSL"
+msgstr "启用 SSL"
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:40
 msgid "Enable logger"
 msgstr "启用日志记录器"
 
@@ -40,14 +44,14 @@ msgstr "启用日志记录器"
 msgid "Grant UCI access for netdata"
 msgstr "授予访问 LuCI 应用 netdata 的权限"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:39
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:47
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:43
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:51
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:3
 #: applications/luci-app-netdata/root/usr/share/luci/menu.d/luci-app-netdata.json:14
 msgid "Netdata"
 msgstr ""
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/main.js:18
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/main.js:19
 msgid "Port 0 is not supported.<br />Change to a other port and try again."
 msgstr "不支持端口 0。<br />改为其他端口然后再试一次。"
 
@@ -55,15 +59,22 @@ msgstr "不支持端口 0。<br />改为其他端口然后再试一次。"
 msgid "Service port"
 msgstr "服务端口"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:39
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:40
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:43
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:44
 msgid "Start"
 msgstr "启动"
 
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:47
-#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:48
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:51
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:52
 msgid "Stop"
 msgstr "停止"
+
+#: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/config.js:37
+msgid ""
+"To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-"
+"nginx</b><br/> first"
+msgstr ""
+"要启用此功能必须先安装 <b>luci-nginx</b> 和 <b>luci-ssl-nginx</b><br/>"
 
 #: applications/luci-app-netdata/htdocs/luci-static/resources/view/netdata/advanced.js:25
 msgid "Unable to save contents: %s"

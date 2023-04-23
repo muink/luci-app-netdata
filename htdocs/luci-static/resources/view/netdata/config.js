@@ -33,6 +33,10 @@ return view.extend({
 		o.placeholder = '19999';
 		o.rmempty = false;
 
+		o = s.option(form.Flag, 'ssl_sw', _('Enable SSL'), 
+			_('To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-nginx</b><br/> first'));
+		o.rmempty = true;
+
 		o = s.option(form.Flag, 'logger', _('Enable logger'));
 		o.rmempty = true;
 
