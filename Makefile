@@ -10,7 +10,7 @@ LUCI_NAME:=luci-app-netdata
 PKG_VERSION:=20221121
 
 LUCI_TITLE:=LuCI Netdata
-LUCI_DEPENDS:=+netdata
+LUCI_DEPENDS:=+netdata +openssl-util
 
 LUCI_DESCRIPTION:=Real-time performance monitoring
 

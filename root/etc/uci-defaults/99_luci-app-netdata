@@ -34,14 +34,24 @@ luci_overridden() {
 get_config() {
     config_get_bool enabled $1 enabled 0
     config_get_bool ssl $1 ssl_sw 0
+    config_get_bool auth $1 auth 0
+    config_get userpw $1 userpw 'admin:$apr1$t7qQjoqb$YBHtAb7VGSkjIdObMG.Oy0'
     config_get_bool logger $1 logger 0
     config_get port $1 port 19999
 }
 
 write_nginx() {
-location="/etc/nginx/conf.d/netdata.locations"
-mkdir -p /etc/nginx/conf.d/ 2>/dev/null
-[ -f "$location" ] && [ "$(sed -En "s|.*\bproxy_pass\s*https?:[^:]+:(\d+).*|\1|p" "$location")" == "$port" ] && return 0
+confdir="/etc/nginx/conf.d"
+location="$confdir/netdata.locations"
+htpasswd="$confdir/netdata.htpasswd"
+mkdir -p     "$confdir"/ 2>/dev/null
+mkdir -p /var"$confdir"/ 2>/dev/null
+touch "/var$location"
+touch "/var$htpasswd"
+[ -n "$(ls -l "$location" 2>/dev/null|grep "$location -> /var$location")" ] || ln -sf "/var$location" "$location"
+[ -n "$(ls -l "$htpasswd" 2>/dev/null|grep "$htpasswd -> /var$htpasswd")" ] || ln -sf "/var$htpasswd" "$htpasswd"
+
+echo "$userpw" > "$htpasswd"
 cat << LOCATIONS > "$location"
 location /netdata/ {
     proxy_set_header Host \$host;
@@ -51,6 +61,12 @@ location /netdata/ {
     proxy_pass http://localhost:$port/;
 }
 LOCATIONS
+if [ "$auth" == "1" ]; then
+sed -i "/proxy_pass/a\\
+\tauth_basic \"Please login to continue\";\n\
+\tauth_basic_user_file \"$htpasswd\";\
+" "$location"
+fi
 /etc/init.d/nginx reload
 }
 

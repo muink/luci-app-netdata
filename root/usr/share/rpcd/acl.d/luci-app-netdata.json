@@ -4,7 +4,8 @@
     "read": {
       "file": {
         "/etc/netdata/netdata.conf": [ "read" ],
-        "/etc/init.d/netdata": [ "exec" ]
+        "/etc/init.d/netdata": [ "exec" ],
+        "/usr/bin/openssl": [ "exec" ]
       },
       "ubus": {
         "file": [ "read" ]

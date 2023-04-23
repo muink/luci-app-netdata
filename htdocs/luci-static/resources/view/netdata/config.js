@@ -37,6 +37,16 @@ return view.extend({
 			_('To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-nginx</b><br/> first'));
 		o.rmempty = true;
 
+		o = s.option(form.Flag, 'auth', _('Enable Auth'));
+		o.rmempty = true;
+		o.depends('ssl_sw', '1');
+
+		o = s.option(form.Value, 'userpw', _('Login Username and Password hash'));
+		o.placeholder = 'admin:$apr1$t7qQjoqb$YBHtAb7VGSkjIdObMG.Oy0';
+		o.rmempty = false;
+		o.retain = true;
+		o.depends('auth', '1');
+
 		o = s.option(form.Flag, 'logger', _('Enable logger'));
 		o.rmempty = true;
 
@@ -55,6 +65,60 @@ return view.extend({
 			return fs.exec('/etc/init.d/netdata', ['stop'])
 				.catch(function(e) { ui.addNotification(null, E('p', e.message), 'error') });
 		};
+
+		s = m.section(form.TypedSection, '_utilities');
+		s.render = L.bind(function(view, section_id) {
+			return  E('div',{ 'class': 'cbi-section' }, [
+				E('h3', {}, [ _('Password hash generator') ]),
+				E('div', { 'class': 'generator' }, [
+					E('div', { 'class': 'control-group' }, [
+						E('button', {
+							'class': 'cbi-button cbi-button-neutral',
+							'click': ui.createHandlerFn(this, () => {
+								let npwn = document.querySelector('#_passwd_type');
+
+								if (npwn.type == 'password') {
+									npwn.setAttribute('type', 'text');
+								} else if (npwn.type == 'text') {
+									npwn.setAttribute('type', 'password');
+								}
+							})
+						}, '*'),
+						E('input', {
+							'id': '_passwd_type',
+							'style': 'margin:5px 0',
+							'class': 'cbi-input-password',
+							'type': 'password',
+							'value': 'type new passwd here'
+						})
+					]),
+					E('button', {
+						'class': 'cbi-button cbi-button-action',
+						'click': ui.createHandlerFn(this, () => {
+							let npw = document.querySelector('#_passwd_type').value,
+								button = document.querySelector('.generator > .cbi-button');
+
+							button.setAttribute('disabled', 'true');
+
+							return fs.exec('openssl', [ 'passwd', '-apr1', npw ]).then(function(res) {
+								let out = document.querySelector('#_passwd_hash_out');
+								out.value = res.stdout || '';
+							}).catch(e => {
+								ui.addNotification(null, E('p', e.message), 'error');
+							}).finally(() => {
+								button.removeAttribute('disabled');
+							});
+						})
+					}, [ _('GenNew') ]),
+					E('input', {
+						'id': '_passwd_hash_out',
+						'style': 'margin:5px 0; width:320px',
+						'type': 'text',
+						'readonly': ''
+					})
+				])
+			]);
+		}, o, this);
 
 		return m.render();
 	}
