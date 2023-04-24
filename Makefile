@@ -7,10 +7,10 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_NAME:=luci-app-netdata
-PKG_VERSION:=20230423
+PKG_VERSION:=20230424
 
 LUCI_TITLE:=LuCI Netdata
-LUCI_DEPENDS:=+netdata +openssl-util
+LUCI_DEPENDS:=+netdata +openssl-util +PACKAGE_nginx:luci-nginx +PACKAGE_nginx:luci-ssl-nginx
 
 LUCI_DESCRIPTION:=Real-time performance monitoring
 
