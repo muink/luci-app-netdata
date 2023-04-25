@@ -12,11 +12,13 @@ return view.extend({
 
 	load: function() {
 	return Promise.all([
-		uci.load('netdata'),
+		L.resolveDefault(fs.stat('/usr/sbin/nginx'), {}),
+		uci.load('netdata')
 	]);
 	},
 
 	render: function(res) {
+		var has_nginx = res[0].path;
 
 		var m, s, o;
 
@@ -33,13 +35,24 @@ return view.extend({
 		o.placeholder = '19999';
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'ssl_sw', _('Enable SSL'), 
-			_('To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-nginx</b><br/> first'));
+		o = s.option(form.Flag, 'ssl_sw', _('Enable SSL'));
 		o.rmempty = true;
+		if (! has_nginx) {
+			o.description = _('To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-nginx</b><br/> first');
+			o.readonly = true;
+		}
+
+		o.write = function(section, value) {
+			uci.set('netdata', section, 'ssl_sw', has_nginx ? value : null);
+		};
 
 		o = s.option(form.Flag, 'auth', _('Enable Auth'));
 		o.rmempty = true;
 		o.depends('ssl_sw', '1');
+
+		o.write = function(section, value) {
+			uci.set('netdata', section, 'auth', has_nginx ? value : null);
+		};
 
 		o = s.option(form.Value, 'userpw', _('Login Username and Password hash'));
 		o.placeholder = 'admin:$apr1$t7qQjoqb$YBHtAb7VGSkjIdObMG.Oy0';
@@ -100,7 +113,7 @@ return view.extend({
 
 							button.setAttribute('disabled', 'true');
 
-							return fs.exec('openssl', [ 'passwd', '-apr1', npw ]).then(function(res) {
+							return fs.exec('/usr/bin/openssl', [ 'passwd', '-apr1', npw ]).then(function(res) {
 								let out = document.querySelector('#_passwd_hash_out');
 								out.value = res.stdout || '';
 							}).catch(e => {

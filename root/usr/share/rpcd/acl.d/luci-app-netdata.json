@@ -5,7 +5,7 @@
       "file": {
         "/etc/netdata/netdata.conf": [ "read" ],
         "/etc/init.d/netdata": [ "exec" ],
-        "/usr/bin/openssl": [ "exec" ]
+        "/usr/bin/openssl passwd -apr1 *": [ "exec" ]
       },
       "ubus": {
         "file": [ "read" ]

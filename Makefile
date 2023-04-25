@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_NAME:=luci-app-netdata
-PKG_VERSION:=20230423
+PKG_VERSION:=20230425
 
 LUCI_TITLE:=LuCI Netdata
 LUCI_DEPENDS:=+netdata +openssl-util

@@ -41,9 +41,9 @@ get_config() {
 }
 
 write_nginx() {
-confdir="/etc/nginx/conf.d"
-location="$confdir/netdata.locations"
-htpasswd="$confdir/netdata.htpasswd"
+local confdir="/etc/nginx/conf.d"
+local location="$confdir/netdata.locations"
+local htpasswd="$confdir/netdata.htpasswd"
 mkdir -p     "$confdir"/ 2>/dev/null
 mkdir -p /var"$confdir"/ 2>/dev/null
 touch "/var$location"
