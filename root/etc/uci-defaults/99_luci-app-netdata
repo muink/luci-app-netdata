@@ -41,31 +41,15 @@ get_config() {
 }
 
 write_nginx() {
-local confdir="/etc/nginx/conf.d"
-local location="$confdir/netdata.locations"
-local htpasswd="$confdir/netdata.htpasswd"
-mkdir -p     "$confdir"/ 2>/dev/null
-mkdir -p /var"$confdir"/ 2>/dev/null
-touch "/var$location"
-touch "/var$htpasswd"
-[ -n "$(ls -l "$location" 2>/dev/null|grep "$location -> /var$location")" ] || ln -sf "/var$location" "$location"
-[ -n "$(ls -l "$htpasswd" 2>/dev/null|grep "$htpasswd -> /var$htpasswd")" ] || ln -sf "/var$htpasswd" "$htpasswd"
+local location="/etc/nginx/conf.d/netdata.locations"
+local htpasswd="/etc/nginx/conf.d/netdata.htpasswd"
 
 echo "$userpw" > "$htpasswd"
-cat << LOCATIONS > "$location"
-location /netdata/ {
-    proxy_set_header Host \$host;
-    proxy_set_header X-Real-IP \$remote_addr;
-    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto \$scheme;
-    proxy_pass http://localhost:$port/;
-}
-LOCATIONS
-if [ "$auth" == "1" ]; then
-sed -i "/proxy_pass/a\\
-\tauth_basic \"Please login to continue\";\n\
-\tauth_basic_user_file \"$htpasswd\";\
-" "$location"
+[ "$(sed -En "s|^\s*proxy_pass\s+https?://[^:]+:(\d+).*|\1|p" "$location")" == "$port" ] || sed -Ei "/proxy_pass/{s|(\bproxy_pass\b)(\s+.+)?|\1 http://localhost:$port/;|}" "$location"
+if [ "$auth" == "1" ];then
+    sed -Ei "s|#(\bauth_basic_user_file\b)|\1|" "$location"
+else
+    sed -Ei "s|^(\s*)(\bauth_basic_user_file\b)|\1#\2|" "$location"
 fi
 /etc/init.d/nginx reload
 }
