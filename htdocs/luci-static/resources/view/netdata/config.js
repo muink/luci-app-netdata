@@ -63,6 +63,15 @@ return view.extend({
 		o = s.option(form.Flag, 'logger', _('Enable logger'));
 		o.rmempty = true;
 
+		o = s.option(form.Button, '_webui', _('Open Web UI'));
+		o.inputtitle = _('Open');
+		o.inputstyle = 'apply';
+		o.onclick = L.bind(function(ev, section_id) {
+			var port=document.getElementById('widget.' + this.cbid(section_id).match(/.+\./) + 'port').value;
+			//alert(releasestag);
+			window.open("http://" + window.location.hostname + ':' + port + '/', '_blank');
+		}, o)
+
 		o = s.option(form.Button, '_start', _('Start') + ' ' + _('Netdata'));
 		o.inputtitle = _('Start');
 		o.inputstyle = 'apply';
