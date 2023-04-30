@@ -15,7 +15,6 @@ LUCI_DEPENDS:=+netdata +openssl-util
 LUCI_DESCRIPTION:=Real-time performance monitoring
 
 define Package/$(LUCI_NAME)/conffiles
-/etc/config/netdata
 endef
 
 define Package/$(LUCI_NAME)/postinst
