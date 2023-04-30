@@ -35,7 +35,10 @@ return view.extend({
 		o.placeholder = '19999';
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'ssl_sw', _('Enable SSL'));
+		o = s.option(form.Flag, 'enable_ssl', _('Enable SSL'));
+		o.rmempty = true;
+
+		o = s.option(form.Flag, 'nginx_support', _('Nginx Support'));
 		o.rmempty = true;
 		if (! has_nginx) {
 			o.description = _('To enable this feature you need install <b>luci-nginx</b> and <b>luci-ssl-nginx</b><br/> first');
@@ -43,34 +46,32 @@ return view.extend({
 		}
 
 		o.write = function(section, value) {
-			uci.set('netdata', section, 'ssl_sw', has_nginx ? value : null);
+			uci.set('netdata', section, 'nginx_support', has_nginx ? value : null);
 		};
 
 		o = s.option(form.Flag, 'auth', _('Enable Auth'));
 		o.rmempty = true;
-		o.depends('ssl_sw', '1');
+		o.depends('nginx_support', '1');
 
 		o.write = function(section, value) {
 			uci.set('netdata', section, 'auth', has_nginx ? value : null);
 		};
 
-		o = s.option(form.Value, 'userpw', _('Login Username and Password hash'));
+		o = s.option(form.Value, 'user_passwd', _('Login Username and Password hash'));
 		o.placeholder = 'admin:$apr1$t7qQjoqb$YBHtAb7VGSkjIdObMG.Oy0';
 		o.rmempty = false;
 		o.retain = true;
 		o.depends('auth', '1');
-
-		o = s.option(form.Flag, 'logger', _('Enable logger'));
-		o.rmempty = true;
 
 		o = s.option(form.Button, '_webui', _('Open Web UI'));
 		o.inputtitle = _('Open');
 		o.inputstyle = 'apply';
 		o.onclick = L.bind(function(ev, section_id) {
 			var port=document.getElementById('widget.' + this.cbid(section_id).match(/.+\./) + 'port').value,
-				ssl=uci.get('netdata', section_id, 'ssl_sw') || '0';
+				ssl=uci.get('netdata', section_id, 'enable_ssl') || '0',
+				nginx=uci.get('netdata', section_id, 'nginx_support') || '0';
 
-			window.open((ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (ssl === '1' ? '/netdata/' : ':' + port));
+			window.open((ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (nginx === '1' ? '/netdata/' : ':' + port));
 		}, o)
 
 		o = s.option(form.Button, '_start', _('Start') + ' ' + _('Netdata'));
