@@ -67,9 +67,10 @@ return view.extend({
 		o.inputtitle = _('Open');
 		o.inputstyle = 'apply';
 		o.onclick = L.bind(function(ev, section_id) {
-			var port=document.getElementById('widget.' + this.cbid(section_id).match(/.+\./) + 'port').value;
-			//alert(releasestag);
-			window.open("http://" + window.location.hostname + ':' + port + '/', '_blank');
+			var port=document.getElementById('widget.' + this.cbid(section_id).match(/.+\./) + 'port').value,
+				ssl=uci.get('netdata', section_id, 'ssl_sw') || '0';
+
+			window.open((ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (ssl === '1' ? '/netdata/' : ':' + port));
 		}, o)
 
 		o = s.option(form.Button, '_start', _('Start') + ' ' + _('Netdata'));
