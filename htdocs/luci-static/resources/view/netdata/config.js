@@ -37,6 +37,7 @@ return view.extend({
 
 		o = s.option(form.Flag, 'enable_ssl', _('Enable SSL'));
 		o.rmempty = true;
+		o.depends('nginx_support', '0');
 
 		o = s.option(form.Value, 'cert_file', _('Cert file'));
 		o.placeholder = '/etc/netdata/cert.crt';
@@ -83,7 +84,7 @@ return view.extend({
 				ssl=uci.get('netdata', section_id, 'enable_ssl') || '0',
 				nginx=uci.get('netdata', section_id, 'nginx_support') || '0';
 
-			window.open((ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (nginx === '1' ? '/netdata/' : ':' + port));
+			window.open((nginx === '1' ? window.location.protocol : ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (nginx === '1' ? '/netdata/' : ':' + port));
 		}, o)
 
 		o = s.option(form.Button, '_start', _('Start') + ' ' + _('Netdata'));

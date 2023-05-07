@@ -19,7 +19,7 @@ return view.extend({
 			return E('div', { class: 'alert-message warning' },
 					_('Port 0 is not supported.<br />Change to a other port and try again.'));
 		return E('iframe', {
-			src: (ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (nginx === '1' ? '/netdata/' : ':' + port),
+			src: (nginx === '1' ? window.location.protocol : ssl === '1' ? 'https:' : 'http:') + '//' + window.location.hostname + (nginx === '1' ? '/netdata/' : ':' + port),
 			style: 'width: 100%; min-height: 100vh; border: none; border-radius: 3px;'
 		});
 	}
