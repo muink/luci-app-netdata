@@ -80,7 +80,7 @@ return view.extend({
 		o.inputtitle = _('Open');
 		o.inputstyle = 'apply';
 		o.onclick = L.bind(function(ev, section_id) {
-			var port=document.getElementById('widget.' + this.cbid(section_id).match(/.+\./) + 'port').value,
+			var port=uci.get('netdata', section_id, 'port') || '19999',
 				ssl=uci.get('netdata', section_id, 'enable_ssl') || '0',
 				nginx=uci.get('netdata', section_id, 'nginx_support') || '0';
 
@@ -112,7 +112,7 @@ return view.extend({
 						E('button', {
 							'class': 'cbi-button cbi-button-neutral',
 							'click': ui.createHandlerFn(this, () => {
-								let npwn = document.querySelector('#_passwd_type');
+								let npwn = this.map.findElement('id', '_passwd_type');
 
 								if (npwn.type == 'password') {
 									npwn.setAttribute('type', 'text');
@@ -132,13 +132,13 @@ return view.extend({
 					E('button', {
 						'class': 'cbi-button cbi-button-action',
 						'click': ui.createHandlerFn(this, () => {
-							let npw = document.querySelector('#_passwd_type').value,
-								button = document.querySelector('.generator > .cbi-button');
+							let npw = this.map.findElement('id', '_passwd_type').value,
+								button = document.querySelector('.generator > .cbi-button'),
+								out = this.map.findElement('id', '_passwd_hash_out');
 
 							button.setAttribute('disabled', 'true');
 
 							return fs.exec('/usr/bin/openssl', [ 'passwd', '-apr1', npw ]).then(function(res) {
-								let out = document.querySelector('#_passwd_hash_out');
 								out.value = res.stdout || '';
 							}).catch(e => {
 								ui.addNotification(null, E('p', e.message), 'error');
