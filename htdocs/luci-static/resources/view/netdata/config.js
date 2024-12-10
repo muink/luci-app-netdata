@@ -20,7 +20,7 @@ return view.extend({
 	render: function(res) {
 		var has_nginx = res[0].path;
 
-		var m, s, o;
+		let m, s, o;
 
 		m = new form.Map('netdata');
 
